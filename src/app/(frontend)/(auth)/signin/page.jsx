@@ -9,7 +9,7 @@ const Signin = async () => {
   const session = await unstable_getServerSession(authOptions);
 
   // If already connected, can not access to `/signin`.
-  if (session) redirect("/");
+  if (session) redirect("/dashboard");
 
   return (
     <main className="flex flex-col justify-center items-center h-full">
