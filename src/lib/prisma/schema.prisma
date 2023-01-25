@@ -1,6 +1,6 @@
 datasource db {
   provider = "mongodb"
-  url = env("DATABASE_URL")
+  url = env("DB_URL")
 }
 
 generator client {
@@ -8,8 +8,8 @@ generator client {
 }
 
 model Account {
-	id                 String  @id @default(auto()) @map("_id") @db.ObjectId
-  userId             String @db.ObjectId
+	id                 String   @id @default(auto()) @map("_id") @db.ObjectId
+  userId             String   @db.ObjectId
   type               String
   provider           String
   providerAccountId  String
@@ -35,7 +35,7 @@ model Session {
 }
 
 model User {
-	id            String  @id @default(auto()) @map("_id") @db.ObjectId
+	id            String    @id @default(auto()) @map("_id") @db.ObjectId
   name          String?
   email         String?   @unique
   emailVerified DateTime?
@@ -45,7 +45,7 @@ model User {
 }
 
 model VerificationToken {
-	id         String  @id @default(auto()) @map("_id") @db.ObjectId
+	id         String   @id @default(auto()) @map("_id") @db.ObjectId
   identifier String
   token      String   @unique
   expires    DateTime
