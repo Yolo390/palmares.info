@@ -4,6 +4,8 @@ import { PrismaAdapter } from "@next-auth/prisma-adapter";
 
 import prisma from "@/lib/prisma/prismaClient";
 
+const emails = process.env.AUTHORIZED_EMAILS;
+
 export const authOptions = {
   adapter: PrismaAdapter(prisma),
   providers: [
@@ -15,11 +17,14 @@ export const authOptions = {
   callbacks: {
     async signIn({ account, profile }) {
       if (account.provider === "google") {
-        return profile.email_verified; // return only `email_verified` google account.
+        return profile.email_verified && emails.includes(profile.email); // return only `email_verified` google account.
       }
       return true; // Do different verification for other providers that don't have `email_verified`.
     },
   },
+  // pages: {
+  //   signIn: "/signin",
+  // },
 };
 
 export default NextAuth(authOptions);
