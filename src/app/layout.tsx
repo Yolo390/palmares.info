@@ -9,7 +9,7 @@ const RootLayout = ({ children }: { children: ReactNode }) => {
     <html lang="en">
       <head />
       <SessionProvider>
-        <body>{children}</body>
+        <body className="h-screen">{children}</body>
       </SessionProvider>
     </html>
   );
