@@ -22,9 +22,12 @@ export const authOptions = {
       return true; // Do different verification for other providers that don't have `email_verified`.
     },
   },
-  // pages: {
-  //   signIn: "/signin",
-  // },
+  pages: {
+    signIn: "/signin",
+  },
+  session: {
+    strategy: "jwt",
+  },
 };
 
 export default NextAuth(authOptions);
