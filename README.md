@@ -11,7 +11,8 @@ npm install -D prisma tailwindcss postcss autoprefixer @hookform/devtools
 <br />
 
 ### Prisma
-To read .env.local file because by default Prisma only read .env file.
+To read .env.local file because by default Prisma only read .env file.<br />
+https://www.prisma.io/docs/guides/development-environment/environment-variables/managing-env-files-and-setting-variables#manage-env-files-manually
 ```sh
 npm install -g dotenv-cli
 ```
