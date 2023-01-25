@@ -1,3 +1,15 @@
+# Palmares.info
+
+I am using Next.js 13 (13.1.5 when I started this project - 25/01/2023).
+
+Dependencies
+```sh
+npm install next-auth @next-auth/prisma-adapter @prisma/client react-hook-form @hookform/resolvers yup validator bcrypt class-variance-authority clsx tailwindcss-animate tailwind-merge lucide-react && \
+npm install -D prisma tailwindcss postcss autoprefixer @hookform/devtools
+```
+
+---
+
 This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 
 ## Getting Started
