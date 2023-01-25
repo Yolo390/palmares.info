@@ -8,7 +8,7 @@ const Home = () => {
       <div>Home page</div>
       <div>
         <Button variant="default">
-          <Link href="/api/auth/signin">Login</Link>
+          <Link href="/signin">Login</Link>
         </Button>
       </div>
     </main>
