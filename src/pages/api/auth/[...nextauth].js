@@ -7,6 +7,7 @@ import prisma from "@/lib/prisma/prismaClient";
 const emails = process.env.AUTHORIZED_EMAILS;
 
 export const authOptions = {
+  secret: process.env.NEXTAUTH_SECRET,
   adapter: PrismaAdapter(prisma),
   providers: [
     GoogleProvider({
@@ -24,6 +25,9 @@ export const authOptions = {
   },
   pages: {
     signIn: "/signin",
+  },
+  session: {
+    strategy: "jwt", // JSON Web Token
   },
 };
 
