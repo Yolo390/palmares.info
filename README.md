@@ -1,6 +1,6 @@
 # Palmares.info
 
-I am using Next.js 13 (13.1.5 when I started this project - 25/01/2023).
+I am using Next.js 13 (13.1.5 when I started this project - 25/01/2023) with TypeScript.
 
 Dependencies
 ```sh
