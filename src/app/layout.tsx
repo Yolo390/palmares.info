@@ -1,12 +1,16 @@
 import { ReactNode } from "react";
 
+import SessionProvider from "@/context/nextAuth/SessionProvider";
+
 import "@/styles/globals.css";
 
 const RootLayout = ({ children }: { children: ReactNode }) => {
   return (
     <html lang="en">
       <head />
-      <body>{children}</body>
+      <SessionProvider>
+        <body>{children}</body>
+      </SessionProvider>
     </html>
   );
 };
