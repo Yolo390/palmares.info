@@ -25,9 +25,6 @@ export const authOptions = {
   pages: {
     signIn: "/signin",
   },
-  session: {
-    strategy: "jwt",
-  },
 };
 
 export default NextAuth(authOptions);

@@ -9,7 +9,7 @@ import { Button } from "@/components/ui/Button";
 
 const SignIn = () => {
   const searchParams = useSearchParams();
-  const callbackUrl = searchParams.get("callbackUrl");
+  const callbackUrl = searchParams.get("callbackUrl") || "";
 
   return (
     <main className="flex flex-col justify-center items-center h-full">
