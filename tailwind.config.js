@@ -1,4 +1,5 @@
-import { fontFamily } from "tailwindcss/defaultTheme";
+// Can not use ES6 modules... throw an error !
+const { fontFamily } = require("tailwindcss/defaultTheme");
 
 /** @type {import('tailwindcss').Config} */
 module.exports = {
