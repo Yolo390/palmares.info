@@ -4,7 +4,19 @@ import Link from "next/link";
 import { signOut } from "next-auth/react";
 import clsx from "clsx";
 
-import { LayoutGrid, LogOut, Plus, User, UserPlus } from "lucide-react";
+import {
+  Layers,
+  LayoutGrid,
+  LogOut,
+  Medal,
+  Plus,
+  PlusCircle,
+  Sheet,
+  Trophy,
+  User,
+  UserPlus,
+  Users,
+} from "lucide-react";
 import Man from "@mui/icons-material/Man";
 import Woman from "@mui/icons-material/Woman";
 import SportsBasketballIcon from "@mui/icons-material/SportsBasketball";
@@ -30,19 +42,15 @@ const BottomMenuBar = () => {
   return (
     <div
       className={clsx(
-        "fixed bottom-0 w-full flex justify-around",
-        "sm:bottom-10 sm:flex sm:justify-center"
+        "fixed bottom-3 w-full flex justify-center",
+        "sm:bottom-10"
       )}
     >
-      <Menubar
-        className={clsx(
-          "w-screen flex justify-between mr-2 ml-2",
-          "sm:w-[400px] sm:flex sm:justify-around"
-        )}
-      >
+      <Menubar>
         <MenubarMenu>
           <MenubarTrigger className="hover:cursor-pointer">
-            Dashboard
+            <Layers className="h-4 w-4 sm:hidden" />
+            <span className="hidden sm:block">Dashboard</span>
           </MenubarTrigger>
           <MenubarContent>
             <Link href="/admin/profile">
@@ -63,7 +71,8 @@ const BottomMenuBar = () => {
 
         <MenubarMenu>
           <MenubarTrigger className="hover:cursor-pointer">
-            Sports
+            <Sheet className="h-4 w-4 sm:hidden" />
+            <span className="hidden sm:block">Sports</span>
           </MenubarTrigger>
           <MenubarContent>
             <MenubarItem>
@@ -113,7 +122,8 @@ const BottomMenuBar = () => {
 
         <MenubarMenu>
           <MenubarTrigger className="hover:cursor-pointer">
-            Athletes
+            <Users className="h-4 w-4 sm:hidden" />
+            <span className="hidden sm:block">Athletes</span>
           </MenubarTrigger>
           <MenubarContent>
             <Link href="/admin/men">
@@ -139,9 +149,31 @@ const BottomMenuBar = () => {
         </MenubarMenu>
 
         <MenubarMenu>
+          <MenubarTrigger className="hover:cursor-pointer">
+            <Trophy className="h-4 w-4 sm:hidden" />
+            <span className="hidden sm:block">Titles</span>
+          </MenubarTrigger>
+          <MenubarContent>
+            <Link href="/admin/titles">
+              <MenubarItem>
+                <Trophy fontSize="small" className="mr-2 h-4 w-4" />
+                All titles
+              </MenubarItem>
+            </Link>
+            <MenubarSeparator />
+            <Link href="/admin/addtitle">
+              <MenubarItem>
+                <PlusCircle className="mr-2 h-4 w-4" />
+                Add new title
+              </MenubarItem>
+            </Link>
+          </MenubarContent>
+        </MenubarMenu>
+
+        <MenubarMenu>
           <MenubarTrigger onClick={signOut} className="hover:cursor-pointer">
-            <LogOut className="mr-2 h-4 w-4" />
-            <span className="invisible sm:visible">Sign out</span>
+            <LogOut className="h-4 w-4 sm:hidden" />
+            <span className="hidden sm:block sm:font-semibold">Sign out</span>
           </MenubarTrigger>
         </MenubarMenu>
       </Menubar>
