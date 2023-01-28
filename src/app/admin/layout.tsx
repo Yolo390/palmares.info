@@ -2,7 +2,7 @@ import { ReactNode } from "react";
 
 import SessionProvider from "@/context/nextAuth/SessionProvider";
 
-import BottomMenuBar from "@/components/backend/navbar/BottomMenuBar";
+import BottomMenuBar from "@/components/admin/navbar/BottomMenuBar";
 import "@/styles/globals.css";
 
 const BackendLayout = ({ children }: { children: ReactNode }) => {

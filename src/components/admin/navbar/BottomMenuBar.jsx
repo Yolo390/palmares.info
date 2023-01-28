@@ -45,14 +45,14 @@ const BottomMenuBar = () => {
             Dashboard
           </MenubarTrigger>
           <MenubarContent>
-            <Link href="/profile">
+            <Link href="/admin/profile">
               <MenubarItem>
                 <User className="mr-2 h-4 w-4" />
                 Profile
               </MenubarItem>
             </Link>
             <MenubarSeparator />
-            <Link href="/dashboard">
+            <Link href="/admin/dashboard">
               <MenubarItem>
                 <LayoutGrid className="mr-2 h-4 w-4" />
                 Home
@@ -102,10 +102,12 @@ const BottomMenuBar = () => {
               Football
             </MenubarItem>
             <MenubarSeparator />
-            <MenubarItem>
-              <Plus className="mr-2 h-4 w-4" />
-              Add new sport
-            </MenubarItem>
+            <Link href="/admin/addsport">
+              <MenubarItem>
+                <Plus className="mr-2 h-4 w-4" />
+                Add new sport
+              </MenubarItem>
+            </Link>
           </MenubarContent>
         </MenubarMenu>
 
@@ -114,19 +116,25 @@ const BottomMenuBar = () => {
             Athletes
           </MenubarTrigger>
           <MenubarContent>
-            <MenubarItem>
-              <Man fontSize="small" className="mr-2 h-4 w-4" />
-              Men
-            </MenubarItem>
-            <MenubarItem>
-              <Woman fontSize="small" className="mr-2 h-4 w-4" />
-              Women
-            </MenubarItem>
+            <Link href="/admin/men">
+              <MenubarItem>
+                <Man fontSize="small" className="mr-2 h-4 w-4" />
+                Men
+              </MenubarItem>
+            </Link>
+            <Link href="/admin/women">
+              <MenubarItem>
+                <Woman fontSize="small" className="mr-2 h-4 w-4" />
+                Women
+              </MenubarItem>
+            </Link>
             <MenubarSeparator />
-            <MenubarItem>
-              <UserPlus className="mr-2 h-4 w-4" />
-              Add new athlete
-            </MenubarItem>
+            <Link href="/admin/addathlete">
+              <MenubarItem>
+                <UserPlus className="mr-2 h-4 w-4" />
+                Add new athlete
+              </MenubarItem>
+            </Link>
           </MenubarContent>
         </MenubarMenu>
 
