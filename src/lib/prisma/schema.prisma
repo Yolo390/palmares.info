@@ -29,8 +29,8 @@ model Account {
 model Session {
 	id           String   @id @default(auto()) @map("_id") @db.ObjectId
   sessionToken String   @unique
-  userId       String   @db.ObjectId
   expires      DateTime
+	userId       String   @db.ObjectId
   user         User     @relation(fields: [userId], references: [id], onDelete: Cascade)
 }
 
@@ -51,4 +51,35 @@ model VerificationToken {
   expires    DateTime
 
   @@unique([identifier, token])
+}
+
+model Sport {
+	id         String   @id @default(auto()) @map("_id") @db.ObjectId
+	name       String   @unique
+	// One to many relation
+	athletes   Athlete[]
+}
+
+model Athlete {
+	id           String   @id @default(auto()) @map("_id") @db.ObjectId
+	firstnname   String
+	lastname     String
+	birthdate    DateTime
+	nickname     String?  @default("")
+	// One to many relation
+	sportId      String   @db.ObjectId
+  sport        Sport    @relation(fields: [sportId], references: [id])
+	// Many to many relation
+	titleIDs     String[] @db.ObjectId
+	titles       Title[]  @relation(fields: [titleIDs], references: [id])
+}
+
+model Title {
+	id           String     @id @default(auto()) @map("_id") @db.ObjectId
+	name         String
+	nickname     String?    @default("")
+	date         DateTime
+	// Many to many relation
+	athleteIDs   String[]   @db.ObjectId
+	athletes     Athlete[]  @relation(fields: [athleteIDs], references: [id])
 }
