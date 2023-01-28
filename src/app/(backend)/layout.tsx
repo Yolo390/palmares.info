@@ -2,7 +2,7 @@ import { ReactNode } from "react";
 
 import SessionProvider from "@/context/nextAuth/SessionProvider";
 
-import BottomNavbar from "@/components/backend/navbar/BottomNavbar";
+import BottomMenuBar from "@/components/backend/navbar/BottomMenuBar";
 import "@/styles/globals.css";
 
 const BackendLayout = ({ children }: { children: ReactNode }) => {
@@ -12,7 +12,7 @@ const BackendLayout = ({ children }: { children: ReactNode }) => {
       <SessionProvider>
         <body className="h-screen">
           {children}
-          <BottomNavbar />
+          <BottomMenuBar />
         </body>
       </SessionProvider>
     </html>
