@@ -106,10 +106,12 @@ const BottomMenuBar = () => {
               <SportsRugbyIcon fontSize="small" className="mr-2 h-4 w-4" />
               Rugby
             </MenubarItem>
-            <MenubarItem>
-              <SportsSoccerIcon fontSize="small" className="mr-2 h-4 w-4" />
-              Football
-            </MenubarItem>
+            <Link href="/admin/football">
+              <MenubarItem>
+                <SportsSoccerIcon fontSize="small" className="mr-2 h-4 w-4" />
+                Football
+              </MenubarItem>
+            </Link>
             <MenubarSeparator />
             <Link href="/admin/addsport">
               <MenubarItem>
