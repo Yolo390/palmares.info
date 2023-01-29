@@ -26,7 +26,7 @@
     "clsx": "^1.2.1",
     "lucide-react": "^0.105.0",
     "next": "13.1.5",
-    "next-auth": "^4.18.10",
+    "next-auth": "^4.19.0",
     "react": "18.2.0",
     "react-dom": "18.2.0",
     "react-hook-form": "^7.42.1",
