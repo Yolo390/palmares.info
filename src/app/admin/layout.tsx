@@ -5,7 +5,7 @@ import SessionProvider from "@/context/nextAuth/SessionProvider";
 import BottomMenuBar from "@/components/admin/navbar/BottomMenuBar";
 import "@/styles/globals.css";
 
-const BackendLayout = ({ children }: { children: ReactNode }) => {
+const AdminLayout = ({ children }: { children: ReactNode }) => {
   return (
     <html lang="en">
       <head />
@@ -19,4 +19,4 @@ const BackendLayout = ({ children }: { children: ReactNode }) => {
   );
 };
 
-export default BackendLayout;
+export default AdminLayout;
