@@ -1,5 +1,7 @@
+import SportForm from "@/components/admin/form/Sport";
+
 const AddSport = () => {
-  return <div>Add a new sport</div>;
+  return <SportForm />;
 };
 
 export default AddSport;
