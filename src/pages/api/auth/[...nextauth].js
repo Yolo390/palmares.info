@@ -23,11 +23,14 @@ export const authOptions = {
       return true; // Do different verification for other providers that don't have `email_verified`.
     },
     session: async ({ session, token }) => {
+      // To get user id on session.
       if (session?.user) session.user.id = token.sub;
+
       return session;
     },
     jwt: async ({ user, token }) => {
       if (user) token.sub = user.id;
+
       return token;
     },
   },
