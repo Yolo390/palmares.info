@@ -9,6 +9,7 @@ import validator from "validator";
 import TextField from "@mui/material/TextField";
 
 import { Button } from "@/components/ui/Button";
+import SnackbarMUI from "@/components/toast/Snackbar";
 
 const schema = object({
   email: string()
@@ -22,6 +23,7 @@ const schema = object({
 
 const ProfileForm = ({ user }) => {
   const [err, setErr] = useState({});
+  const [updated, setUpdated] = useState(Boolean(false));
 
   const {
     control,
@@ -49,8 +51,7 @@ const ProfileForm = ({ user }) => {
 
       if (!res.ok) throw new Error("Failed to update user.");
 
-      // TODO:
-      // add toast when user successfully updated.
+      setUpdated(Boolean(true));
     } catch (error) {
       setErr({ message: error.message });
     }
@@ -104,6 +105,8 @@ const ProfileForm = ({ user }) => {
       <Button type="submit" variant="outline">
         Edit
       </Button>
+
+      {updated && <SnackbarMUI setUpdated={setUpdated} type="success" />}
     </form>
   );
 };
