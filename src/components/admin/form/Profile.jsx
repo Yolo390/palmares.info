@@ -9,7 +9,7 @@ import validator from "validator";
 import TextField from "@mui/material/TextField";
 
 import { Button } from "@/components/ui/Button";
-import SnackbarMUI from "@/components/toast/Snackbar";
+import SnackbarMUI from "@/components/admin/toast/Snackbar";
 
 const schema = object({
   email: string()
