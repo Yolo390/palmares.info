@@ -21,7 +21,7 @@ const schema = object({
 }).required();
 
 const ProfileForm = ({ user }) => {
-  const [error, setError] = useState({});
+  const [err, setErr] = useState({});
 
   const {
     control,
@@ -34,8 +34,6 @@ const ProfileForm = ({ user }) => {
   const onSubmit = async (data) => {
     const { email, name } = data;
 
-    console.log("email: ", email);
-
     // Use validator to avoid xss attacks.
     const safeData = {
       email: validator.escape(email),
@@ -43,13 +41,18 @@ const ProfileForm = ({ user }) => {
     };
 
     try {
-      // TODO:
-      // submit to backend
-      const res = await useUpdateUserById(safeData);
+      const res = await fetch("/api/admin/profile/update", {
+        body: JSON.stringify(safeData),
+        headers: { "Content-Type": "application/json" },
+        method: "PATCH",
+      });
 
-      if (res.error) throw new Error(res.error.message);
+      if (!res.ok) throw new Error("Failed to update user.");
+
+      // TODO:
+      // add toast when user successfully updated.
     } catch (error) {
-      setError({ message: error.message });
+      setErr({ message: error.message });
     }
   };
 
@@ -61,7 +64,7 @@ const ProfileForm = ({ user }) => {
       <Controller
         name="email"
         control={control}
-        defaultValue={user.email || ""}
+        defaultValue={user?.email || ""}
         render={({ field }) => (
           <TextField
             {...field}
@@ -74,6 +77,7 @@ const ProfileForm = ({ user }) => {
             autoComplete="off"
             helperText={errors.email ? errors.email?.message : ""}
             error={errors.email ? Boolean(true) : Boolean(false)}
+            disabled
           />
         )}
       />
@@ -81,7 +85,7 @@ const ProfileForm = ({ user }) => {
       <Controller
         name="name"
         control={control}
-        defaultValue={user.name || ""}
+        defaultValue={user?.name || ""}
         render={({ field }) => (
           <TextField
             {...field}
