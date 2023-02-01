@@ -10,6 +10,7 @@ import TextField from "@mui/material/TextField";
 
 import { Button } from "@/components/ui/Button";
 import SnackbarMUI from "@/components/admin/toast/Snackbar";
+import AdminError from "@/components/admin/error/AdminError.jsx";
 
 const schema = object({
   name: string()
@@ -31,13 +32,26 @@ const SportForm = ({ user }) => {
   });
 
   const onSubmit = async (data) => {
-    console.log("frontend data: ", data);
+    const { name } = data;
+
+    // Use validator to avoid xss attacks.
+    const safeData = { name: validator.escape(name) };
 
     try {
-      // TODO:
-      // create new sport through API.
+      fetch("/api/admin/sport/addSport", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(safeData),
+      })
+        .then((res) => res.json())
+        .then((res) => {
+          if (res.error) {
+            setErr({ message: res.error });
+            return null;
+          }
 
-      setUpdated(Boolean(true));
+          setUpdated(Boolean(true));
+        });
     } catch (error) {
       setErr({ message: error.message });
     }
@@ -63,6 +77,7 @@ const SportForm = ({ user }) => {
             placeholder="Enter a new sport"
             helperText={errors.name ? errors.name?.message : ""}
             error={errors.name ? Boolean(true) : Boolean(false)}
+            autoComplete="off"
           />
         )}
       />
@@ -71,7 +86,16 @@ const SportForm = ({ user }) => {
         Add sport
       </Button>
 
-      {updated && <SnackbarMUI setUpdated={setUpdated} type="success" />}
+      {updated && (
+        <SnackbarMUI
+          setUpdated={setUpdated}
+          type="success"
+          page="Sport"
+          status="created"
+        />
+      )}
+
+      {err?.message && <AdminError error={err} setError={setErr} />}
     </form>
   );
 };
