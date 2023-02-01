@@ -44,9 +44,9 @@ const ProfileForm = ({ user }) => {
 
     try {
       const res = await fetch("/api/admin/profile/update", {
-        body: JSON.stringify(safeData),
-        headers: { "Content-Type": "application/json" },
         method: "PATCH",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(safeData),
       });
 
       if (!res.ok) throw new Error("Failed to update user.");
