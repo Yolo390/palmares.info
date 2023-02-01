@@ -91,7 +91,7 @@ const SportForm = ({ user }) => {
           setUpdated={setUpdated}
           type="success"
           page="Sport"
-          status="created"
+          action="created"
         />
       )}
 

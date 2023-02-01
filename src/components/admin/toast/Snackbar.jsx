@@ -9,7 +9,7 @@ const Alert = forwardRef(function Alert(props, ref) {
   return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
 });
 
-const SnackbarMUI = ({ setUpdated, type = "success", page, status }) => {
+const SnackbarMUI = ({ setUpdated, type = "success", page, action }) => {
   const [open, setOpen] = useState(Boolean(true));
 
   const handleClose = (_, reason) => {
@@ -29,7 +29,7 @@ const SnackbarMUI = ({ setUpdated, type = "success", page, status }) => {
       anchorOrigin={{ vertical: "bottom", horizontal: "center" }}
     >
       <Alert onClose={handleClose} severity={type} sx={{ width: "100%" }}>
-        {page} successfully {status} !
+        {page} successfully {action} !
       </Alert>
     </Snackbar>
   );

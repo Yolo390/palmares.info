@@ -106,7 +106,14 @@ const ProfileForm = ({ user }) => {
         Edit
       </Button>
 
-      {updated && <SnackbarMUI setUpdated={setUpdated} type="success" />}
+      {updated && (
+        <SnackbarMUI
+          setUpdated={setUpdated}
+          type="success"
+          page="Profile"
+          action="updated"
+        />
+      )}
     </form>
   );
 };
