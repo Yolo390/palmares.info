@@ -1,8 +1,10 @@
 import { ReactNode } from "react";
 
 import SessionProvider from "@/context/nextAuth/SessionProvider";
+import LocalizationProvider from "@/context/datePickersMUI/LocalizationProvider";
 
 import BottomMenuBar from "@/components/admin/navbar/BottomMenuBar";
+
 import "@/styles/globals.css";
 
 const AdminLayout = ({ children }: { children: ReactNode }) => {
@@ -10,10 +12,12 @@ const AdminLayout = ({ children }: { children: ReactNode }) => {
     <html lang="en">
       <head />
       <SessionProvider>
-        <body className="h-screen">
-          {children}
-          <BottomMenuBar />
-        </body>
+        <LocalizationProvider>
+          <body className="h-screen">
+            {children}
+            <BottomMenuBar />
+          </body>
+        </LocalizationProvider>
       </SessionProvider>
     </html>
   );
