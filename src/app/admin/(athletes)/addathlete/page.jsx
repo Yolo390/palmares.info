@@ -1,5 +1,7 @@
+import AthleteForm from "@/components/admin/form/Athlete";
+
 const AddAthlete = () => {
-  return <div>Add a new Athlete</div>;
+  return <AthleteForm />;
 };
 
 export default AddAthlete;
