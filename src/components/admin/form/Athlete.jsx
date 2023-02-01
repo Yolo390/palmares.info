@@ -6,11 +6,12 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import { date, object, string } from "yup";
 import validator from "validator";
 
+import useGetSports from "@/utils/swr/getSports";
+
 import TextField from "@mui/material/TextField";
 
 import { Button } from "@/components/ui/Button";
 import SnackbarMUI from "@/components/admin/toast/Snackbar";
-// import { DatePicker } from "@mui/x-date-pickers/DatePicker";
 import { MobileDatePicker } from "@mui/x-date-pickers/MobileDatePicker";
 
 const schema = object({
@@ -32,7 +33,8 @@ const schema = object({
 const AthleteForm = ({ user }) => {
   const [err, setErr] = useState({});
   const [updated, setUpdated] = useState(Boolean(false));
-  const [birthdate, setBirthdate] = useState(null);
+
+  const { data } = useGetSports();
 
   const {
     control,

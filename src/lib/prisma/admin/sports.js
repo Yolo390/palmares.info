@@ -1,5 +1,15 @@
 import prisma from "@/lib/prisma/prismaClient";
 
+export const getSports = async () => {
+  try {
+    const sports = await prisma.sport.findMany();
+
+    return { sports };
+  } catch (error) {
+    return { error };
+  }
+};
+
 export const addSport = async (sport) => {
   try {
     const name = sport.name.trim();
