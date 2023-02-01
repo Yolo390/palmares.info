@@ -62,10 +62,10 @@ model Sport {
 
 model Athlete {
 	id           String   @id @default(auto()) @map("_id") @db.ObjectId
-	firstnname   String
+	firstname    String
 	lastname     String
-	birthdate    DateTime
 	nickname     String?  @default("")
+	birthdate    DateTime
 	// One to many relation
 	sportId      String   @db.ObjectId
   sport        Sport    @relation(fields: [sportId], references: [id])
