@@ -16,7 +16,7 @@ const schema = object({
     .required("Please enter your email adress.")
     .email("Invalid email adress !"),
   name: string()
-    .required()
+    .required("Please enter your name.")
     .min(3, "Name should be between 3 to 16 characters.")
     .max(16, "Name should be between 3 to 16 characters."),
 }).required();

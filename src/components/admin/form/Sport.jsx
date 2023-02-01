@@ -13,7 +13,7 @@ import SnackbarMUI from "@/components/admin/toast/Snackbar";
 
 const schema = object({
   name: string()
-    .required()
+    .required("Please enter a name.")
     .min(3, "Name should be between 3 to 16 characters.")
     .max(16, "Name should be between 3 to 16 characters."),
 }).required();
@@ -60,7 +60,7 @@ const SportForm = ({ user }) => {
             variant="standard"
             className="ml-[20px] mr-[20px]"
             label="Name"
-            placeholder="Enter a new name"
+            placeholder="Enter a new sport"
             helperText={errors.name ? errors.name?.message : ""}
             error={errors.name ? Boolean(true) : Boolean(false)}
           />
@@ -68,7 +68,7 @@ const SportForm = ({ user }) => {
       />
 
       <Button type="submit" variant="outline">
-        Add
+        Add sport
       </Button>
 
       {updated && <SnackbarMUI setUpdated={setUpdated} type="success" />}
