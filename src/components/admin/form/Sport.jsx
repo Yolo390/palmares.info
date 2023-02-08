@@ -19,7 +19,7 @@ const schema = object({
     .max(16, "Name should be between 3 to 16 characters."),
 }).required();
 
-const SportForm = ({ user }) => {
+const SportForm = () => {
   const [err, setErr] = useState({});
   const [updated, setUpdated] = useState(Boolean(false));
 
@@ -35,7 +35,7 @@ const SportForm = ({ user }) => {
     const { name } = data;
 
     // Use validator to avoid xss attacks.
-    const safeData = { name: validator.escape(name) };
+    const safeData = { name: validator.escape(name.toUpperCase()) };
 
     try {
       fetch("/api/admin/sport/addSport", {
