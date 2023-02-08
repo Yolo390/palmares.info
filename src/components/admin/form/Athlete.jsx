@@ -9,10 +9,17 @@ import validator from "validator";
 import useGetSports from "@/utils/swr/getSports";
 
 import TextField from "@mui/material/TextField";
+import { MobileDatePicker } from "@mui/x-date-pickers/MobileDatePicker";
 
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/Select";
 import { Button } from "@/components/ui/Button";
 import SnackbarMUI from "@/components/admin/toast/Snackbar";
-import { MobileDatePicker } from "@mui/x-date-pickers/MobileDatePicker";
 
 const schema = object({
   firstname: string()
@@ -30,11 +37,12 @@ const schema = object({
   birthdate: date("Invalid date").required("Please enter a birthdate."),
 }).required();
 
-const AthleteForm = ({ user }) => {
+const AthleteForm = () => {
   const [err, setErr] = useState({});
   const [updated, setUpdated] = useState(Boolean(false));
 
   const { data } = useGetSports();
+  const sports = data?.sports;
 
   const {
     control,
@@ -72,7 +80,7 @@ const AthleteForm = ({ user }) => {
             id="firstname"
             type="text"
             variant="standard"
-            className="ml-[20px] mr-[20px]"
+            className="ml-5 mr-5"
             label="Firstname"
             placeholder="Enter a new firstname"
             required
@@ -92,7 +100,7 @@ const AthleteForm = ({ user }) => {
             id="lastname"
             type="text"
             variant="standard"
-            className="ml-[20px] mr-[20px]"
+            className="ml-5 mr-5"
             label="Lastname"
             placeholder="Enter a new lastname"
             required
@@ -112,7 +120,7 @@ const AthleteForm = ({ user }) => {
             id="nickname"
             type="text"
             variant="standard"
-            className="ml-[20px] mr-[20px]"
+            className="ml-5 mr-5"
             label="Nickname"
             placeholder="Enter a new nickname"
             helperText={errors.nickname ? errors.nickname?.message : ""}
@@ -136,7 +144,7 @@ const AthleteForm = ({ user }) => {
               <TextField
                 {...params}
                 variant="standard"
-                className="ml-[20px] mr-[20px]"
+                className="ml-5 mr-5"
                 placeholder="Enter a birthdate"
                 required
                 helperText={errors.birthdate ? errors.birthdate?.message : ""}
@@ -144,6 +152,45 @@ const AthleteForm = ({ user }) => {
               />
             )}
           />
+        )}
+      />
+
+      <Controller
+        name="sports"
+        control={control}
+        defaultValue={"-"}
+        render={({ field }) => (
+          <div {...field} className="w-[323px]">
+            <Select>
+              <SelectTrigger>
+                <SelectValue placeholder="Sports" />
+              </SelectTrigger>
+              <SelectContent>
+                {sports &&
+                  sports.map((sport) => (
+                    <SelectItem key={sport.id} value={sport.name}>
+                      {sport.name}
+                    </SelectItem>
+                  ))}
+              </SelectContent>
+            </Select>
+          </div>
+        )}
+      />
+
+      <Controller
+        name="titles"
+        control={control}
+        defaultValue={"-"}
+        render={({ field }) => (
+          <div {...field} className="w-[323px]">
+            <Select>
+              <SelectTrigger>
+                <SelectValue placeholder="Titles" />
+              </SelectTrigger>
+              <SelectContent></SelectContent>
+            </Select>
+          </div>
         )}
       />
 
