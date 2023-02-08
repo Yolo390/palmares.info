@@ -58,6 +58,8 @@ model Sport {
 	name       String   @unique
 	// One to many relation
 	athletes   Athlete[]
+	// One to many relation
+	titles     Title[]
 }
 
 model Athlete {
@@ -79,6 +81,9 @@ model Title {
 	name         String
 	nickname     String?    @default("")
 	date         DateTime
+	// One to many relation
+	sportId      String     @db.ObjectId
+	sport        Sport      @relation(fields: [sportId], references: [id])
 	// Many to many relation
 	athleteIDs   String[]   @db.ObjectId
 	athletes     Athlete[]  @relation(fields: [athleteIDs], references: [id])
