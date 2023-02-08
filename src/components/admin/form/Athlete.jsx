@@ -156,6 +156,25 @@ const AthleteForm = () => {
       />
 
       <Controller
+        name="gender"
+        control={control}
+        defaultValue={""}
+        render={({ field }) => (
+          <div {...field} className="w-[323px]">
+            <Select>
+              <SelectTrigger>
+                <SelectValue placeholder="Gender" />
+              </SelectTrigger>
+              <SelectContent>
+                <SelectItem value={"MAN"}>Man</SelectItem>
+                <SelectItem value={"WOMAN"}>Woman</SelectItem>
+              </SelectContent>
+            </Select>
+          </div>
+        )}
+      />
+
+      <Controller
         name="sports"
         control={control}
         defaultValue={"-"}
