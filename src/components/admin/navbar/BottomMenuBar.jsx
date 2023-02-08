@@ -8,7 +8,6 @@ import {
   Layers,
   LayoutGrid,
   LogOut,
-  Medal,
   Plus,
   PlusCircle,
   Sheet,
@@ -34,7 +33,6 @@ import {
   MenubarItem,
   MenubarMenu,
   MenubarSeparator,
-  // MenubarShortcut,
   MenubarTrigger,
 } from "@/components/ui/MenuBar";
 
