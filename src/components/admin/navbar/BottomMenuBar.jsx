@@ -104,14 +104,14 @@ const BottomMenuBar = () => {
               <SportsRugbyIcon fontSize="small" className="mr-2 h-4 w-4" />
               Rugby
             </MenubarItem>
-            <Link href="/admin/football">
+            <Link href="/admin/sports/football">
               <MenubarItem>
                 <SportsSoccerIcon fontSize="small" className="mr-2 h-4 w-4" />
                 Football
               </MenubarItem>
             </Link>
             <MenubarSeparator />
-            <Link href="/admin/addsport">
+            <Link href="/admin/sports/add">
               <MenubarItem>
                 <Plus className="mr-2 h-4 w-4" />
                 Add new sport
@@ -126,20 +126,20 @@ const BottomMenuBar = () => {
             <span className="hidden sm:block">Athletes</span>
           </MenubarTrigger>
           <MenubarContent>
-            <Link href="/admin/men">
+            <Link href="/admin/athletes/men">
               <MenubarItem>
                 <Man fontSize="small" className="mr-2 h-4 w-4" />
                 Men
               </MenubarItem>
             </Link>
-            <Link href="/admin/women">
+            <Link href="/admin/athletes/women">
               <MenubarItem>
                 <Woman fontSize="small" className="mr-2 h-4 w-4" />
                 Women
               </MenubarItem>
             </Link>
             <MenubarSeparator />
-            <Link href="/admin/addathlete">
+            <Link href="/admin/athletes/add">
               <MenubarItem>
                 <UserPlus className="mr-2 h-4 w-4" />
                 Add new athlete
@@ -154,14 +154,14 @@ const BottomMenuBar = () => {
             <span className="hidden sm:block">Titles</span>
           </MenubarTrigger>
           <MenubarContent>
-            <Link href="/admin/titles">
+            <Link href="/admin/titles/list">
               <MenubarItem>
                 <Trophy fontSize="small" className="mr-2 h-4 w-4" />
                 All titles
               </MenubarItem>
             </Link>
             <MenubarSeparator />
-            <Link href="/admin/addtitle">
+            <Link href="/admin/titles/add">
               <MenubarItem>
                 <PlusCircle className="mr-2 h-4 w-4" />
                 Add new title
