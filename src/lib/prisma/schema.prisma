@@ -62,12 +62,18 @@ model Sport {
 	titles     Title[]
 }
 
+enum Gender {
+  MAN
+  WOMAN
+}
+
 model Athlete {
 	id           String   @id @default(auto()) @map("_id") @db.ObjectId
 	firstname    String
 	lastname     String
 	nickname     String?  @default("")
 	birthdate    DateTime
+	gender       Gender
 	// One to many relation
 	sportId      String   @db.ObjectId
   sport        Sport    @relation(fields: [sportId], references: [id])
