@@ -1,6 +1,6 @@
 import useSWR from "swr";
 
-const useGetSports = (id) => {
+const useGetSports = () => {
   const { data, error, isLoading } = useSWR(
     "/api/admin/sport/getSports",
     (...args) => fetch(...args).then((res) => res.json())
