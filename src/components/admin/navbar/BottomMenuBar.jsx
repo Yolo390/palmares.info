@@ -7,8 +7,8 @@ import clsx from "clsx";
 import {
   Layers,
   LayoutGrid,
+  List,
   LogOut,
-  Plus,
   PlusCircle,
   Sheet,
   Trophy,
@@ -111,9 +111,15 @@ const BottomMenuBar = () => {
               </MenubarItem>
             </Link>
             <MenubarSeparator />
+            <Link href="/admin/sports/list">
+              <MenubarItem>
+                <List className="mr-2 h-4 w-4" />
+                List all sports
+              </MenubarItem>
+            </Link>
             <Link href="/admin/sports/add">
               <MenubarItem>
-                <Plus className="mr-2 h-4 w-4" />
+                <PlusCircle className="mr-2 h-4 w-4" />
                 Add new sport
               </MenubarItem>
             </Link>
