@@ -10,12 +10,23 @@ export const getSports = async () => {
   }
 };
 
+export const getSport = async (sportName) => {
+  const sport = await prisma.sport.findUnique({
+    where: { name: sportName },
+    include: { athletes: true },
+  });
+
+  if (!sport) return { error: "Sport not founded !" };
+
+  return { sport };
+};
+
 export const addSport = async (sport) => {
   try {
     const name = sport.name.trim();
 
     // Check if name is not empty.
-    if (name === "") return { error: "Name can not be empty !" };
+    if (name === "") return { error: "Sport name can not be empty !" };
 
     // Check if user already exist.
     const existingSport = await prisma.sport.findUnique({
