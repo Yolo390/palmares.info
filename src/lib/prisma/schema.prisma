@@ -73,6 +73,7 @@ model Athlete {
 	lastname     String
 	nickname     String?  @default("")
 	birthdate    DateTime
+	birthplace   String
 	gender       Gender
 	// One to many relation
 	sportId      String   @db.ObjectId
@@ -80,6 +81,8 @@ model Athlete {
 	// Many to many relation
 	titleIDs     String[] @db.ObjectId
 	titles       Title[]  @relation(fields: [titleIDs], references: [id])
+
+	@@unique([firstname, lastname, birthdate, birthplace, gender ])
 }
 
 model Title {
