@@ -5,6 +5,7 @@ import { useForm, Controller } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { date, object, string } from "yup";
 import validator from "validator";
+import clsx from "clsx";
 
 import useGetSports from "@/utils/swr/getSports";
 
@@ -108,7 +109,10 @@ const AthleteForm = () => {
   return (
     <form
       onSubmit={handleSubmit(onSubmit)}
-      className="h-full flex flex-col justify-center items-center gap-7"
+      className={clsx(
+        "h-full flex flex-col justify-center items-center gap-7",
+        "mt-14 mb-20 sm:mt-0 sm:mb-0"
+      )}
     >
       <Controller
         name="firstname"
