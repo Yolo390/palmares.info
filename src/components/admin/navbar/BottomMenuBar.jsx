@@ -9,6 +9,7 @@ import {
   LayoutGrid,
   List,
   LogOut,
+  Medal,
   PlusCircle,
   Sheet,
   Trophy,
@@ -16,8 +17,8 @@ import {
   UserPlus,
   Users,
 } from "lucide-react";
+import DownhillSkiingIcon from "@mui/icons-material/DownhillSkiing";
 import Man from "@mui/icons-material/Man";
-import Woman from "@mui/icons-material/Woman";
 import SportsBasketballIcon from "@mui/icons-material/SportsBasketball";
 import SportsHandballIcon from "@mui/icons-material/SportsHandball";
 import SportsRugbyIcon from "@mui/icons-material/SportsRugby";
@@ -25,7 +26,7 @@ import SportsSoccerIcon from "@mui/icons-material/SportsSoccer";
 import SportsKabaddiIcon from "@mui/icons-material/SportsKabaddi";
 import SportsMartialArtsIcon from "@mui/icons-material/SportsMartialArts";
 import SportsMmaIcon from "@mui/icons-material/SportsMma";
-import DownhillSkiingIcon from "@mui/icons-material/DownhillSkiing";
+import Woman from "@mui/icons-material/Woman";
 
 import {
   Menubar,
@@ -157,12 +158,34 @@ const BottomMenuBar = () => {
         <MenubarMenu>
           <MenubarTrigger className="hover:cursor-pointer">
             <Trophy className="h-4 w-4 sm:hidden" />
+            <span className="hidden sm:block">Competitions</span>
+          </MenubarTrigger>
+          <MenubarContent>
+            <Link href="/admin/competitions/list">
+              <MenubarItem>
+                <Trophy fontSize="small" className="mr-2 h-4 w-4" />
+                All competitions
+              </MenubarItem>
+            </Link>
+            <MenubarSeparator />
+            <Link href="/admin/competitions/add">
+              <MenubarItem>
+                <PlusCircle className="mr-2 h-4 w-4" />
+                Add new competition
+              </MenubarItem>
+            </Link>
+          </MenubarContent>
+        </MenubarMenu>
+
+        <MenubarMenu>
+          <MenubarTrigger className="hover:cursor-pointer">
+            <Medal className="h-4 w-4 sm:hidden" />
             <span className="hidden sm:block">Titles</span>
           </MenubarTrigger>
           <MenubarContent>
             <Link href="/admin/titles/list">
               <MenubarItem>
-                <Trophy fontSize="small" className="mr-2 h-4 w-4" />
+                <Medal fontSize="small" className="mr-2 h-4 w-4" />
                 All titles
               </MenubarItem>
             </Link>
