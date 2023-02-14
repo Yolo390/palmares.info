@@ -54,12 +54,12 @@ model VerificationToken {
 }
 
 model Sport {
-	id         String   @id @default(auto()) @map("_id") @db.ObjectId
-	name       String   @unique
+	id            String   @id @default(auto()) @map("_id") @db.ObjectId
+	name          String   @unique
 	// One to many relation
-	athletes   Athlete[]
+	athletes      Athlete[]
 	// One to many relation
-	titles     Title[]
+	competitions  Competition[]
 }
 
 enum Gender {
@@ -68,34 +68,46 @@ enum Gender {
 }
 
 model Athlete {
-	id           String   @id @default(auto()) @map("_id") @db.ObjectId
+	id           String             @id @default(auto()) @map("_id") @db.ObjectId
 	firstname    String
 	lastname     String
-	nickname     String?  @default("")
+	nickname     String?            @default("")
 	birthdate    DateTime
 	birthplace   String
 	gender       Gender
 	// One to many relation
-	sportId      String   @db.ObjectId
-  sport        Sport    @relation(fields: [sportId], references: [id])
+	sportId      String             @db.ObjectId
+  sport        Sport              @relation(fields: [sportId], references: [id])
 	// Many to many relation
-	titleIDs     String[] @db.ObjectId
+	titleIDs     String[]           @db.ObjectId
 	titles       Title[]  @relation(fields: [titleIDs], references: [id])
 
 	@@unique([firstname, lastname, birthdate, birthplace, gender ])
 }
 
-model Title {
-	id           String     @id @default(auto()) @map("_id") @db.ObjectId
-	name         String
-	nickname     String?    @default("")
-	date         DateTime
+model Competition {
+	id                String     @id @default(auto()) @map("_id") @db.ObjectId
+	name              String
+	nickname          String?    @default("")
+	creationDate      DateTime
 	// One to many relation
-	sportId      String     @db.ObjectId
-	sport        Sport      @relation(fields: [sportId], references: [id])
-	// Many to many relation
-	athleteIDs   String[]   @db.ObjectId
-	athletes     Athlete[]  @relation(fields: [athleteIDs], references: [id])
+	sportId           String     @db.ObjectId
+	sport             Sport      @relation(fields: [sportId], references: [id])
+	// One to many relation
+	competitionYears  Title[]
 
-	@@unique([name, date, sportId])
+	@@unique([name, creationDate, sportId])
+}
+
+model Title {
+	id             String       @id @default(auto()) @map("_id") @db.ObjectId
+	date           DateTime
+	// One to many relation
+	competitionId  String       @db.ObjectId
+	competition    Competition  @relation(fields: [competitionId], references: [id])
+	// Many to many relation
+	winnersIDs     String[]     @db.ObjectId
+	winners        Athlete[]    @relation(fields: [winnersIDs], references: [id])
+
+	@@unique([date, competitionId])
 }
