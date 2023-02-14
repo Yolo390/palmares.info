@@ -1,5 +1,7 @@
+import TitleForm from "@/components/admin/form/Title";
+
 const AddTitle = () => {
-  return <div>Add a new title</div>;
+  return <TitleForm />;
 };
 
 export default AddTitle;
