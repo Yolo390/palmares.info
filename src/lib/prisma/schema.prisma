@@ -96,4 +96,6 @@ model Title {
 	// Many to many relation
 	athleteIDs   String[]   @db.ObjectId
 	athletes     Athlete[]  @relation(fields: [athleteIDs], references: [id])
+
+	@@unique([name, date, sportId])
 }
