@@ -21,9 +21,9 @@ export const getSport = async (sportName) => {
   return { sport };
 };
 
-export const addSport = async (sport) => {
+export const addSport = async (data) => {
   try {
-    const name = sport.name.trim();
+    const name = data.name.trim();
 
     // Check if name is not empty.
     if (name === "") return { error: "Sport name can not be empty !" };
@@ -35,11 +35,11 @@ export const addSport = async (sport) => {
 
     if (existingSport) return { error: "Sport already created !" };
 
-    const addedSport = await prisma.sport.create({
+    const sport = await prisma.sport.create({
       data: { name: name },
     });
 
-    return { addedSport };
+    return { sport };
   } catch (error) {
     return { error };
   }

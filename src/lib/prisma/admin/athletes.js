@@ -1,15 +1,15 @@
 import prisma from "@/lib/prisma/prismaClient";
 
-export const addAthlete = async (athlete) => {
+export const addAthlete = async (data) => {
   try {
-    const firstname = athlete.firstname.trim();
-    const lastname = athlete.lastname.trim();
-    const nickname = athlete.nickname.trim();
-    const gender = athlete.gender.trim();
-    const birthdate = athlete.birthdate;
-    const birthplace = athlete.birthplace.trim();
-    const sportId = athlete.sportId;
-    const titles = athlete.titles;
+    const firstname = data.firstname.trim();
+    const lastname = data.lastname.trim();
+    const nickname = data.nickname.trim();
+    const gender = data.gender.trim();
+    const birthdate = data.birthdate;
+    const birthplace = data.birthplace.trim();
+    const sportId = data.sportId;
+    const titles = data.titles;
 
     // Check if fields are not empty.
     if (firstname === "") return { error: "Firstname can not be empty !" };
