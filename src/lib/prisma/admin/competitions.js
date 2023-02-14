@@ -1,5 +1,21 @@
 import prisma from "@/lib/prisma/prismaClient";
 
+export const getCompetitionsBySport = async (sport) => {
+  try {
+    if (sport === "") return { error: "Sport can not be empty !" };
+
+    const competitions = await prisma.competition.findMany({
+      where: { sportId: sport },
+    });
+
+    if (!competitions) return { error: "No competitions founded !" };
+
+    return { competitions };
+  } catch (error) {
+    return { error };
+  }
+};
+
 export const addCompetition = async (data) => {
   try {
     const name = data.name.trim();
