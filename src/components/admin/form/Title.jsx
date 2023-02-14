@@ -1,15 +1,16 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useForm, Controller } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { date, object, string } from "yup";
 import validator from "validator";
 
-import useGetSports from "@/utils/swr/getSports";
-
 import TextField from "@mui/material/TextField";
 import { MobileDatePicker } from "@mui/x-date-pickers/MobileDatePicker";
+
+import useGetSports from "@/utils/swr/getSports";
+import useGetCompetitionsBySport from "@/utils/swr/getCompetitionsBySport";
 
 import {
   Select,
@@ -30,65 +31,78 @@ const getSports = () => {
   return sports;
 };
 
+const getCompetitionsBySport = (sport) => {
+  const { data } = useGetCompetitionsBySport(sport);
+
+  const competitions = data?.competitions;
+
+  return competitions;
+};
+
 const schema = object({
-  name: string()
-    .required("Please enter a competition name.")
-    .min(2, "Name should be between 2 to 22 characters.")
-    .max(22, "Name should be between 2 to 22 characters."),
-  nickname: string().optional("Nickname is not required."),
   date: date("Invalid date").required("Please enter a date."),
-  sport: string().required("Please select a sport"),
+  competition: string().required("Please select a competition."),
 }).required();
 
 const TitleForm = () => {
   const [err, setErr] = useState({});
   const [updated, setUpdated] = useState(Boolean(false));
+  const [displayCompetition, setDisplayCompetition] = useState(Boolean(false));
+  const [competitions, setCompetitions] = useState([]);
 
   const sports = getSports();
-
-  console.log("sports: ", sports);
 
   const {
     control,
     handleSubmit,
     formState: { errors },
+    watch,
   } = useForm({
     resolver: yupResolver(schema),
   });
 
+  const watchSport = watch("sport");
+
+  useEffect(() => {
+    if (watchSport) {
+      fetch(`/api/admin/competition/getCompetitionsBySport?sport=${watchSport}`)
+        .then((res) => res.json())
+        .then((res) => {
+          setCompetitions(res.competitions);
+          setDisplayCompetition(Boolean(true));
+        });
+    }
+  }, [watchSport]);
+
   const onSubmit = async (data) => {
-    console.log("data: ", data);
+    const { date, competition } = data;
 
     // Use validator to avoid xss attacks.
-    // const safeData = {
-    //   firstname: validator.escape(firstname),
-    //   lastname: validator.escape(lastname),
-    //   nickname: validator.escape(nickname),
-    //   gender: validator.escape(gender),
-    //   birthdate,
-    //   birthplace: validator.escape(birthplace),
-    //   sportId: sport,
-    //   titles,
-    // };
+    const safeData = {
+      date,
+      competitionId: validator.escape(competition),
+    };
 
-    // try {
-    //   fetch("/api/admin/athlete/addAthlete", {
-    //     method: "POST",
-    //     headers: { "Content-Type": "application/json" },
-    //     body: JSON.stringify(safeData),
-    //   })
-    //     .then((res) => res.json())
-    //     .then((res) => {
-    //       if (res.error) {
-    //         setErr({ message: res.error });
-    //         return null;
-    //       }
-    //
-    //       setUpdated(Boolean(true));
-    //     });
-    // } catch (error) {
-    //   setErr({ message: error.message });
-    // }
+    console.log("safeData: ", safeData);
+
+    try {
+      fetch("/api/admin/title/addTitle", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(safeData),
+      })
+        .then((res) => res.json())
+        .then((res) => {
+          if (res.error) {
+            setErr({ message: res.error });
+            return null;
+          }
+
+          setUpdated(Boolean(true));
+        });
+    } catch (error) {
+      setErr({ message: error.message });
+    }
   };
 
   return (
@@ -96,44 +110,6 @@ const TitleForm = () => {
       onSubmit={handleSubmit(onSubmit)}
       className="h-full flex flex-col justify-center items-center gap-7"
     >
-      <Controller
-        name="name"
-        control={control}
-        defaultValue={""}
-        render={({ field }) => (
-          <TextField
-            {...field}
-            id="name"
-            type="text"
-            variant="standard"
-            className="ml-5 mr-5"
-            label="Competition name *"
-            placeholder="Enter a new competition name"
-            helperText={errors?.name ? errors?.name?.message : ""}
-            error={errors?.name ? Boolean(true) : Boolean(false)}
-          />
-        )}
-      />
-
-      <Controller
-        name="nickname"
-        control={control}
-        defaultValue={""}
-        render={({ field }) => (
-          <TextField
-            {...field}
-            id="nickname"
-            type="text"
-            variant="standard"
-            className="ml-5 mr-5"
-            label="Nickname"
-            placeholder="Enter a new nickname"
-            helperText={errors?.nickname ? errors?.nickname?.message : ""}
-            error={errors?.nickname ? Boolean(true) : Boolean(false)}
-          />
-        )}
-      />
-
       <Controller
         name="date"
         control={control}
@@ -186,6 +162,37 @@ const TitleForm = () => {
           </div>
         )}
       />
+
+      {displayCompetition && (
+        <Controller
+          name="competition"
+          control={control}
+          defaultValue={""}
+          render={({ field }) => (
+            <div {...field} className="w-[323px]">
+              <Select>
+                <SelectTrigger>
+                  <SelectValue placeholder="Competition *" />
+                </SelectTrigger>
+                <SelectContent>
+                  {competitions &&
+                    competitions.map((competition) => (
+                      <SelectItem key={competition.id} value={competition.id}>
+                        {competition.name}
+                      </SelectItem>
+                    ))}
+                </SelectContent>
+              </Select>
+
+              {errors?.competition && (
+                <span className="text-[#d32f2f] text-xs">
+                  {errors?.competition?.message}
+                </span>
+              )}
+            </div>
+          )}
+        />
+      )}
 
       <Button type="submit" variant="outline">
         Add title
