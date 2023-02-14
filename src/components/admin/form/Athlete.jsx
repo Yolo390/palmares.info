@@ -174,7 +174,7 @@ const AthleteForm = () => {
       <Controller
         name="birthdate"
         control={control}
-        defaultValue={new Date()}
+        defaultValue={""}
         render={({ field }) => (
           <MobileDatePicker
             {...field}
