@@ -111,7 +111,7 @@ const AthleteForm = () => {
       onSubmit={handleSubmit(onSubmit)}
       className={clsx(
         "h-full flex flex-col justify-center items-center gap-7",
-        "mt-14 mb-20 sm:mt-0 sm:mb-0"
+        "mt-14 mb-24 sm:mt-0 sm:mb-0"
       )}
     >
       <Controller
