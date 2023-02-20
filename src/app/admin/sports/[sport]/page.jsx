@@ -1,6 +1,6 @@
-const Football = async () => {
+const Sport = async ({ params }) => {
   const res = await fetch(
-    `http://localhost:3000/api/admin/sport/getSport?name=FOOTBALL`,
+    `http://localhost:3000/api/admin/sport/getSport?name=${params.sport}`,
     {
       method: "GET",
       headers: { "Content-Type": "application/json" },
@@ -11,7 +11,7 @@ const Football = async () => {
 
   console.log("component data.sport", data.sport);
 
-  return <div>Football page</div>;
+  return <div>{data.sport.name} page</div>;
 };
 
-export default Football;
+export default Sport;

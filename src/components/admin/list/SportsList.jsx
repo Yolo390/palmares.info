@@ -26,8 +26,8 @@ const SportsList = ({ sport }) => {
       </CardContent>
 
       <CardActions>
-        <Link href={`/${sport.name}`}>
-          <Button size="small">Learn More</Button>
+        <Link href={`/admin/sports/${sport.name}`}>
+          <Button size="small">See {sport.name}</Button>
         </Link>
       </CardActions>
     </Card>
