@@ -8,6 +8,13 @@ import validator from "validator";
 
 import TextField from "@mui/material/TextField";
 
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/Select";
 import { Button } from "@/components/ui/Button";
 import SnackbarMUI from "@/components/admin/toast/Snackbar";
 import AdminError from "@/components/admin/error/AdminError.jsx";
@@ -17,6 +24,7 @@ const schema = object({
     .required("Please enter a name.")
     .min(3, "Name should be between 3 to 16 characters.")
     .max(16, "Name should be between 3 to 16 characters."),
+  type: string().required("Please select a type").oneOf(["INDIVIDUAL", "TEAM"]),
 }).required();
 
 const SportForm = () => {
@@ -32,10 +40,13 @@ const SportForm = () => {
   });
 
   const onSubmit = async (data) => {
-    const { name } = data;
+    const { name, type } = data;
 
     // Use validator to avoid xss attacks.
-    const safeData = { name: validator.escape(name.toUpperCase()) };
+    const safeData = {
+      name: validator.escape(name.toUpperCase()),
+      type: validator.escape(type),
+    };
 
     try {
       fetch("/api/admin/sport/addSport", {
@@ -79,6 +90,31 @@ const SportForm = () => {
             error={errors.name ? Boolean(true) : Boolean(false)}
             autoComplete="off"
           />
+        )}
+      />
+
+      <Controller
+        name="type"
+        control={control}
+        defaultValue={""}
+        render={({ field }) => (
+          <div {...field} className="w-[323px]">
+            <Select>
+              <SelectTrigger>
+                <SelectValue placeholder="Type *" />
+              </SelectTrigger>
+              <SelectContent>
+                <SelectItem value={"INDIVIDUAL"}>INDIVIDUAL</SelectItem>
+                <SelectItem value={"TEAM"}>TEAM</SelectItem>
+              </SelectContent>
+            </Select>
+
+            {errors?.type && (
+              <span className="text-[#d32f2f] text-xs">
+                {errors?.type?.message}
+              </span>
+            )}
+          </div>
         )}
       />
 
