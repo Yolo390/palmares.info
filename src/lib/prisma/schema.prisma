@@ -53,9 +53,15 @@ model VerificationToken {
   @@unique([identifier, token])
 }
 
+enum Type {
+	INDIVIDUAL
+	TEAM
+}
+
 model Sport {
 	id            String   @id @default(auto()) @map("_id") @db.ObjectId
 	name          String   @unique
+	type          Type
 	// One to many relation
 	athletes      Athlete[]
 	// One to many relation
