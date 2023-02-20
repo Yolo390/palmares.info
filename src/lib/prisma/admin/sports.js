@@ -11,14 +11,18 @@ export const getSports = async () => {
 };
 
 export const getSport = async (sportName) => {
-  const sport = await prisma.sport.findUnique({
-    where: { name: sportName },
-    include: { athletes: true },
-  });
+  try {
+    const sport = await prisma.sport.findUnique({
+      where: { name: sportName },
+      include: { athletes: true },
+    });
 
-  if (!sport) return { error: "Sport not founded !" };
+    if (!sport) return { error: "Sport not founded !" };
 
-  return { sport };
+    return { sport };
+  } catch (error) {
+    return { error };
+  }
 };
 
 export const addSport = async (data) => {
